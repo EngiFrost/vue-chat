@@ -35,7 +35,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    'nuxt-socket-io'
+    'nuxt-socket-io',
+    './modules/socket'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"nuxt\" \"nodemon ./server/app.js\"",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -13,6 +13,7 @@
     "lintfix": "yarn lint:js --fix"
   },
   "dependencies": {
+    "@nuxt/kit": "^3.0.0-rc.11",
     "@nuxtjs/pwa": "^3.3.5",
     "concurrently": "^7.4.0",
     "core-js": "^3.19.3",

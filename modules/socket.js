@@ -19,8 +19,11 @@ export default defineNuxtModule({
       io.on("connection", (socket) => {
         console.log("CONNECTION");
 
-        socket.emit('getMessage', {text: 'WHAT'})
-        console.log ('action emitted')
+        socket.on("createMessage", (data) => {
+          setTimeout(() => { // NOTE: async imitation
+            socket.emit("getMessage", { text: data.text + " SERVER" });
+          }, 1500);
+        });
       });
     });
   },

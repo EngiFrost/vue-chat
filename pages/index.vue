@@ -37,6 +37,8 @@ import { mapMutations } from "vuex";
 export default {
   layout: "empty",
 
+  head: { title: "Authentication" },
+
   sockets: {
     connect() {
       console.log("socket connected");

@@ -1,5 +1,8 @@
+// TODO: use Pinia instead!
+
 export const store = () => ({
   user: {},
+  messages: [],
 });
 
 export const mutations = {
@@ -7,9 +10,9 @@ export const mutations = {
     state.user = user;
   },
 
-  clearUserData(state) {
+  clearData(state) {
     state.user = {}
-    console.log(state.user)
+    state.messages = []
   }
 };
 

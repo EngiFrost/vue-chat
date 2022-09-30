@@ -56,11 +56,11 @@ export default {
   computed: mapState(["user"]),
 
   methods: {
-    ...mapMutations(["clearUserData"]),
+    ...mapMutations(["clearData"]),
 
     leave() {
       this.$router.push("/?message=leftChat");
-      this.clearUserData();
+      this.clearData();
     },
   },
 };

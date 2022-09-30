@@ -1,5 +1,9 @@
 <template>
-  <h1>CHAT PAGE {{ user.name }}</h1>
+  <ul>
+    <li v-for="message in messages" key="message.text">
+      {{ message.text }}
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -9,7 +13,7 @@ export default {
     return { title: `Room ${this.user.room}` };
   },
 
-  computed: mapState(["user"]),
+  computed: mapState(["user, messages"]),
 
   middleware: ["chat"],
 };

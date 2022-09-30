@@ -24,10 +24,10 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-toolbar app dense>
+      <v-toolbar dense>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-btn icon @click="back">
+        <v-btn icon @click="leave">
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
 
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   data: () => ({
     drawer: true,
@@ -56,7 +56,12 @@ export default {
   computed: mapState(["user"]),
 
   methods: {
-    back() {},
+    ...mapMutations(["clearUserData"]),
+
+    leave() {
+      this.$router.push("/?message=leftChat");
+      this.clearUserData();
+    },
   },
 };
 </script>

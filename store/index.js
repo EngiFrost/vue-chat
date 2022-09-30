@@ -6,6 +6,11 @@ export const mutations = {
   setUser(state, user) {
     state.user = user;
   },
+
+  clearUserData(state) {
+    state.user = {}
+    console.log(state.user)
+  }
 };
 
 export const actions = {

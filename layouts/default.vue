@@ -1,7 +1,27 @@
 <template>
   <!-- app prop applies block to app layout -->
   <v-app app dark>
-    <v-navigation-drawer app v-model="drawer"> </v-navigation-drawer>
+    <v-navigation-drawer app v-model="drawer">
+      <v-list subheader>
+        <v-subheader>Users in room</v-subheader>
+
+        <v-list-item v-for="user in users" :key="user.id" @click.prevent>
+          <!-- <v-list-item-avatar> // TODO:
+            <v-img :alt="`${chat.title} avatar`" :src="chat.avatar"></v-img>
+          </v-list-item-avatar> -->
+
+          <v-list-item-content>
+            <v-list-item-title v-text="user.name"></v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-icon>
+            <v-icon :color="user.id === 2 ? 'primary' : 'grey'">
+              mdi-message-outline
+            </v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main>
       <v-toolbar app dense>
@@ -26,6 +46,11 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     drawer: true,
+    users: [
+      { id: 1, name: "User 1" },
+      { id: 2, name: "User 2" },
+      { id: 3, name: "User 3" },
+    ],
   }),
 
   computed: mapState(["user"]),

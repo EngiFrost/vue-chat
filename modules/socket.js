@@ -23,11 +23,18 @@ export default defineNuxtModule({
             return cb("Invalid data");
           }
 
+          socket.join(data.room); // NOTE: subscribed to a specific channel
           cb({ userId: socket.id });
           socket.emit(
             "newMessage",
             convertToObject("admin", `Welcome to the chat, ${data.name}!`)
           );
+          socket.broadcast // NOTE: emitting an event for all room members except sender
+            .to(data.room)
+            .emit(
+              "newMessage",
+              convertToObject("admin", `User ${data.name} joined`)
+            );
         });
       });
     });

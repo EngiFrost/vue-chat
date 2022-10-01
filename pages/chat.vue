@@ -13,7 +13,7 @@ export default {
     return { title: `Room ${this.user.room}` };
   },
 
-  computed: mapState(["user, messages"]),
+  computed: mapState(["user", "messages"]),
 
   middleware: ["chat"],
 };

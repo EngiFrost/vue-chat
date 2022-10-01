@@ -17,14 +17,21 @@ export default defineNuxtModule({
       nuxt.hook("close", () => io.close());
 
       io.on("connection", (socket) => {
-        console.log("CONNECTION");
+        socket.on("userJoined", (data, cb) => {
+          if (!data.name || !data.room) {
+            // TODO: use typescript or move validation out
+            return cb("Invalid data");
+          }
 
-        socket.on("createMessage", (data) => {
-          setTimeout(() => { // NOTE: async imitation
-            socket.emit("getMessage", { text: data.text + " SERVER" });
-          }, 1500);
+          cb({ userId: socket.id });
+          socket.emit(
+            "newMessage",
+            convertToObject("admin", `Welcome to the chat, ${data.name}!`)
+          );
         });
       });
     });
   },
 });
+
+const convertToObject = (name, text, id) => ({ name, text, id });

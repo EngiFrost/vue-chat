@@ -1,6 +1,6 @@
 // TODO: use Pinia instead!
 
-export const store = () => ({
+export const state = () => ({
   user: {},
   messages: [],
 });
@@ -11,13 +11,11 @@ export const mutations = {
   },
 
   clearData(state) {
-    state.user = {}
-    state.messages = []
-  }
-};
+    state.user = {};
+    state.messages = [];
+  },
 
-export const actions = {
-  SOCKET_getMessage: (ctx, data) => {
-    console.log("Message received", data);
+  SOCKET_newMessage(state, message) {
+    state.messages.push(message);
   },
 };

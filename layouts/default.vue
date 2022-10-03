@@ -23,7 +23,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-main class="main-wrapper">
       <v-toolbar dense>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -34,9 +34,9 @@
         <v-toolbar-title> Chat room {{ user.room }} </v-toolbar-title>
       </v-toolbar>
 
-      <v-container fluid>
+      <div>
         <nuxt />
-      </v-container>
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -65,3 +65,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.main-wrapper {
+  height: 100vh;
+}
+</style>

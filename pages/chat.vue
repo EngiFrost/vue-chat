@@ -1,24 +1,25 @@
 <template>
   <div class="wrapper">
     <div class="chat">
-      <ul>
-        <Message
-          v-for="message in messages"
-          key="message.text"
-          :name="message.name"
-          :text="message.text"
-          owner
-        />
-      </ul>
+      <Message
+        v-for="message in messages"
+        key="message.text"
+        :name="message.name"
+        :text="message.text"
+        owner
+      />
     </div>
 
-    <div class="form">ASDASDASD</div>
+    <div class="form">
+      <ChatInput />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import Message from "../components/Message.vue";
+import ChatInput from "~/components/ChatInput.vue";
 export default {
   head() {
     return { title: `Room ${this.user.room}` };
@@ -26,6 +27,7 @@ export default {
 
   components: {
     Message,
+    ChatInput,
   },
 
   computed: mapState(["user", "messages"]),

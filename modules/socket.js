@@ -40,6 +40,10 @@ export default defineNuxtModule({
               convertToObject("admin", `User ${data.name} joined`)
             );
         });
+
+        socket.on("createMessage", (data, cb) => {
+          socket.emit('newMessage', convertToObject('SERVER', `You've sent: ${data.text}`))
+        })
       });
     });
   },

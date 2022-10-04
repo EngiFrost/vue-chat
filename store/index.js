@@ -16,6 +16,7 @@ export const mutations = {
   },
 
   SOCKET_newMessage(state, message) {
+    console.log(message)
     state.messages.push(message);
   },
 };

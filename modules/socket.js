@@ -29,6 +29,10 @@ export default defineNuxtModule({
             "newMessage",
             convertToObject("admin", `Welcome to the chat, ${data.name}!`)
           );
+          socket.emit(
+            "newMessage",
+            convertToObject("TEST", `Welcome to the chat, buddy!`)
+          );
           socket.broadcast // NOTE: emitting an event for all room members except sender
             .to(data.room)
             .emit(

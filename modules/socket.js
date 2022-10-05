@@ -2,6 +2,8 @@ import { Server } from "socket.io";
 import { defineNuxtModule } from "@nuxt/kit";
 import users from "../api/users";
 
+// TODO: use nuxt-socket-io instead vue-socket-io
+
 export default defineNuxtModule({
   setup(options, nuxt) {
     nuxt.hook("listen", (server) => {
@@ -34,6 +36,7 @@ export default defineNuxtModule({
           });
 
           cb({ userId: socket.id });
+          io.to(data.room).emit("updateUsers", users.getByRoom(data.room));
           socket.emit(
             "newMessage",
             convertToObject("admin", `Welcome to the chat, ${data.name}!`)
@@ -68,6 +71,7 @@ export default defineNuxtModule({
           const user = users.remove(id);
 
           if (user) {
+            io.to(user.room).emit("updateUsers", users.getByRoom(user.room));
             io.to(user.room).emit(
               "newMessage",
               convertToObject("admin", `User ${user.name} left`)
@@ -81,6 +85,7 @@ export default defineNuxtModule({
           const user = users.remove(socket.id);
 
           if (user) {
+            io.to(user.room).emit("updateUsers", users.getByRoom(user.room));
             io.to(user.room).emit(
               "newMessage",
               convertToObject("admin", `User ${user.name} left`)

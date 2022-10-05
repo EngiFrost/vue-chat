@@ -5,17 +5,17 @@
       <v-list subheader>
         <v-subheader>Users in room</v-subheader>
 
-        <v-list-item v-for="user in users" :key="user.id" @click.prevent>
+        <v-list-item v-for="u in users" :key="u.id" @click.prevent>
           <!-- <v-list-item-avatar> // TODO:
             <v-img :alt="`${chat.title} avatar`" :src="chat.avatar"></v-img>
           </v-list-item-avatar> -->
 
           <v-list-item-content>
-            <v-list-item-title v-text="user.name"></v-list-item-title>
+            <v-list-item-title v-text="u.name"></v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-icon>
-            <v-icon :color="user.id === 2 ? 'primary' : 'grey'">
+            <v-icon :color="u.id === user.id ? 'primary' : 'grey'">
               mdi-message-outline
             </v-icon>
           </v-list-item-icon>
@@ -46,14 +46,9 @@ import { mapState, mapMutations } from "vuex";
 export default {
   data: () => ({
     drawer: true,
-    users: [
-      { id: 1, name: "User 1" },
-      { id: 2, name: "User 2" },
-      { id: 3, name: "User 3" },
-    ],
   }),
 
-  computed: mapState(["user"]),
+  computed: mapState(["user", "users"]),
 
   methods: {
     ...mapMutations(["clearData"]),

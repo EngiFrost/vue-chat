@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import { defineNuxtModule } from "@nuxt/kit";
+import users from "../api/users";
 
 export default defineNuxtModule({
   setup(options, nuxt) {
@@ -24,15 +25,20 @@ export default defineNuxtModule({
           }
 
           socket.join(data.room); // NOTE: subscribed to a specific channel
+
+          users.remove(socket.id);
+          users.add({
+            id: socket.id,
+            name: data.name,
+            room: data.room,
+          });
+
           cb({ userId: socket.id });
           socket.emit(
             "newMessage",
             convertToObject("admin", `Welcome to the chat, ${data.name}!`)
           );
-          socket.emit(
-            "newMessage",
-            convertToObject("TEST", `Welcome to the chat, buddy!`)
-          );
+
           socket.broadcast // NOTE: emitting an event for all room members except sender
             .to(data.room)
             .emit(
@@ -42,8 +48,21 @@ export default defineNuxtModule({
         });
 
         socket.on("createMessage", (data, cb) => {
-          socket.emit('newMessage', convertToObject('SERVER', `You've sent: ${data.text}`))
-        })
+          if (!data.text) {
+            return cb("Message text is required");
+          }
+
+          const user = users.get(data.id);
+
+          if (user) {
+            io.to(user.room).emit(
+              "newMessage",
+              convertToObject(user.name, data.text, data.id)
+            );
+          }
+
+          cb();
+        });
       });
     });
   },

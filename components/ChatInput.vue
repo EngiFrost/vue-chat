@@ -21,7 +21,7 @@ export default {
     send() {
       this.$socket.emit(
         "createMessage",
-        { id: this.$store.state.id, text: this.text },
+        { id: this.$store.state.user.id, text: this.text },
         (data) => {
           if (typeof data === "string") {
             console.error(data);

@@ -24,7 +24,9 @@
               required
             ></v-text-field>
 
-            <v-btn :disabled="!valid" class="mr-4" @click="submit"> Enter room </v-btn>
+            <v-btn block :disabled="!valid" class="mr-4" @click="submit">
+              Enter room
+            </v-btn>
           </v-form>
         </v-card-text>
 

@@ -45,7 +45,9 @@ export default {
 .message {
   padding: 1rem;
   margin: 0 1rem 1rem;
-  width: 60%;
+  min-width: 15%;
+  width: fit-content;
+  max-width: 60%;
   box-shadow: 0 1px 0 0 rgba (50, 50, 50, 0.3);
   border-radius: 4px;
   background-color: #1976d2;

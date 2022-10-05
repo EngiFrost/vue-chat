@@ -76,6 +76,17 @@ export default defineNuxtModule({
 
           cb();
         });
+
+        socket.on("disconnect", () => {
+          const user = users.remove(socket.id);
+
+          if (user) {
+            io.to(user.room).emit(
+              "newMessage",
+              convertToObject("admin", `User ${user.name} left`)
+            );
+          }
+        });
       });
     });
   },

@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex sx12 sm8>
-      <v-card min-width="400" class="mt-10">
+      <v-card min-width="400" class="mt-13">
         <v-card-title>
           <h2>Nuxt chat</h2>
         </v-card-title>
@@ -27,6 +27,16 @@
             <v-btn :disabled="!valid" class="mr-4" @click="submit"> Enter room </v-btn>
           </v-form>
         </v-card-text>
+
+        <v-snackbar v-model="snackbar" :timeout="6000" top>
+          {{ message }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn color="primary" text v-bind="attrs" @click="snackbar = false">
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
       </v-card>
     </v-flex>
   </v-layout>
@@ -47,6 +57,8 @@ export default {
 
   data: () => ({
     valid: true,
+    snackbar: false,
+    message: "",
     name: "",
     nameRules: [
       (v) => !!v || "Name is required",
@@ -59,6 +71,21 @@ export default {
       (v) => (v && !isNaN(+v)) || "Room number must contain only digits",
     ],
   }),
+
+  mounted() {
+    const { message } = this.$route.query;
+    console.log(this.$route.query);
+
+    if (message === "noUser") {
+      this.message = "No user provided. Please, log in";
+    }
+
+    if (message === "leftChat") {
+      this.message = "You successfully left the chat";
+    }
+
+    this.snackbar = !!this.message;
+  },
 
   methods: {
     ...mapMutations(["setUser"]),

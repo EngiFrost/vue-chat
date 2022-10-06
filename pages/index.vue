@@ -76,7 +76,6 @@ export default {
 
   mounted() {
     const { message } = this.$route.query;
-    console.log(this.$route.query);
 
     if (message === "noUser") {
       this.message = "No user provided. Please, log in";

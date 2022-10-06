@@ -47,16 +47,6 @@ export default {
     },
   },
 
-  io: {
-    // module options
-    sockets: [
-      {
-        name: "main",
-        url: "http://localhost:3000",
-      },
-    ],
-  },
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"],

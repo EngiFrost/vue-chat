@@ -9,7 +9,7 @@ export default defineNuxtModule({
     nuxt.hook("listen", (server) => {
       const io = new Server(server, {
         cors: {
-          origin: "http://localhost:3000",
+          origin: "http://localhost:3000", // FIXME: use proxy instead localhost
           methods: ["GET", "POST"],
           transports: ["websocket"],
           credentials: true,
